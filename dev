@@ -1,0 +1,16 @@
+#! /bin/sh
+if [ "$1" = "run" ]; then
+		plugin_path="file:target/wasm32-wasi/debug/zessman.wasm"
+		echo "Running plugin: $plugin_path"
+		zellij action start-or-reload-plugin "$plugin_path"
+		arg="$2"
+		if [ -z "$arg" ]; then
+			echo "No argument provided"
+			exit 1
+		fi
+		zellij pipe --plugin "$plugin_path" -- "$arg"
+else
+	cargo watch -x build -s "./dev run $@"
+fi
+
+
