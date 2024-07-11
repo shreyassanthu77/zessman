@@ -1,0 +1,10 @@
+#! /bin/sh
+
+cargo build --release
+cp_path="$HOME/.config/zellij/plugins"
+mkdir -p $cp_path
+rm $cp_path/zessman.wasm
+cp ./target/wasm32-wasi/release/zessman.wasm $cp_path
+echo "Zessman plugin installed successfully!"
+echo "Add the following line to plugins block in your zellij configuration file:"
+echo "zessman location=\"$cp_path/zessman.wasm"

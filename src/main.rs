@@ -21,8 +21,9 @@ impl ZellijPlugin for Zessman {
                 return false;
             }
             eprintln!("Switching to session: {}", session_name);
+            close_self();
             switch_session(Some(session_name.as_str()));
         }
-        false
+        return false;
     }
 }
